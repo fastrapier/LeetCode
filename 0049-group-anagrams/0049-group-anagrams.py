@@ -1,12 +1,14 @@
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        anogramsMap = {}
+        anogramsMap = defaultdict(list)
         
-        for word in strs:
-            sortedWord = str(sorted(word))
-            if sortedWord not in anogramsMap:
-                anogramsMap[sortedWord] = [word]
-            else:
-                anogramsMap[sortedWord].append(word)
+        for s in strs:
+            
+            count = [0] * 26 # a...z
+            
+            for c in s:
+                count[ord(c) - ord("a")] +=1
+            
+            anogramsMap[tuple(count)].append(s)
         
-        return list(anogramsMap.values())
+        return anogramsMap.values()          

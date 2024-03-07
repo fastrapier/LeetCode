@@ -1,10 +1,13 @@
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
-        sHashMap = dict()
-        tHashMap = dict()
-        for elem in s:
-            sHashMap[elem] = sHashMap.setdefault(elem, 0) + 1
-        for elem in t:
-            tHashMap[elem] = tHashMap.setdefault(elem, 0) + 1
         
-        return sHashMap == tHashMap
+        if len(s) != len(t):
+            return False
+        
+        countS, countT = {}, {}
+        
+        for i in range(len(s)):
+            countS[s[i]] = 1 + countS.setdefault(s[i], 0)
+            countT[t[i]] = 1 + countT.setdefault(t[i], 0)
+        
+        return countS == countT
